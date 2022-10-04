@@ -1,0 +1,7 @@
+project: wally
+target: wally
+
+cmds:
+  - cmd: /wally manifest-to-json
+    cwd: /path/to/mypackage
+    filepath: /path/to/mypackage/package.json
