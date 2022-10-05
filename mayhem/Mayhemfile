@@ -5,3 +5,7 @@ cmds:
   - cmd: /wally manifest-to-json
     cwd: /src
     filepath: /src/wally.toml
+
+  - cmd: /wally search
+    cwd: /src
+duration: 600
