@@ -14,4 +14,5 @@ FROM debian:bullseye-slim
 # Create Package
 RUN mkdir src
 
+COPY --from=builder /wally/mayhem/corpus /corpus
 COPY --from=builder /wally/target/debug/wally .
