@@ -1,6 +1,8 @@
 project: wally
 target: wally
 
+testsuite: file://mayhem/corpus
+
 cmds:
   - cmd: /wally manifest-to-json
     cwd: /src
