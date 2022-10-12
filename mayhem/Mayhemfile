@@ -3,6 +3,6 @@ target: wally
 testsuite:
   - file://corpus
 cmds:
-  - cmd: /wally manifest-to-json
+  - cmd: /wally manifest-to-json -x @@
     cwd: /src
     filepath: /src/wally.toml
