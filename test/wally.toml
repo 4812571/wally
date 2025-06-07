@@ -1,0 +1,20 @@
+[package]
+name = "do-not-publish/project-name"
+version = "0.1.0"
+registry = "https://github.com/UpliftGames/wally-index"
+realm = "shared"
+
+[dependencies]
+Loader = "4812571/loader@0.1.0"
+Trove = "sleitnick/trove@1.1.0"
+Fusion = "elttob/fusion@0.3.0"
+Observe = "4812571/observe@0.2.6"
+Signal = "sleitnick/signal@2.0.1"
+PlayerDataAdapter = "4812571/player-data-adapter@0.2.9"
+Timer = "sleitnick/timer@1.1.2"
+Promise = "evaera/promise@4.0.0"
+Net = "4812571/net@0.1.3"
+Sift = "csqrl/sift@0.0.9"
+ImGizmo = "jakeywastaken/imgizmo@3.4.0"
+ComponentBinder = "4812571/component-binder@0.1.5"
+WeightedChoice = "4812571/weighted-choice@1.0.3"
