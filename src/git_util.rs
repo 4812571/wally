@@ -125,6 +125,12 @@ pub fn clone(access_token: Option<String>, url: &Url, into: &Path) -> anyhow::Re
     let mut fetch_options = FetchOptions::new();
     fetch_options.remote_callbacks(callbacks);
 
+    if let Ok(proxy) = std::env::var("HTTPS_PROXY").or_else(|_| std::env::var("https_proxy")) {
+        let mut po = git2::ProxyOptions::new();
+        po.url(&proxy);
+        fetch_options.proxy_options(po);
+    }
+
     let mut builder = RepoBuilder::new();
     builder.fetch_options(fetch_options);
 
@@ -180,6 +186,12 @@ pub fn commit_and_push(
         });
         let mut opts = git2::PushOptions::new();
         opts.remote_callbacks(callbacks);
+
+        if let Ok(proxy) = std::env::var("HTTPS_PROXY").or_else(|_| std::env::var("https_proxy")) {
+            let mut po = git2::ProxyOptions::new();
+            po.url(&proxy);
+            opts.proxy_options(po);
+        }
         origin.push(&["refs/heads/main"], Some(&mut opts))?;
     }
 
@@ -198,6 +210,11 @@ pub fn update_index(access_token: Option<String>, repository: &Repository) -> an
 
     let mut fetch_options = FetchOptions::new();
     fetch_options.remote_callbacks(callbacks);
+    if let Ok(proxy) = std::env::var("HTTPS_PROXY").or_else(|_| std::env::var("https_proxy")) {
+        let mut po = git2::ProxyOptions::new();
+        po.url(&proxy);
+        fetch_options.proxy_options(po);
+    }
 
     repository
         .find_remote("origin")?

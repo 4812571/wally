@@ -7,6 +7,7 @@ mod package;
 mod publish;
 mod search;
 mod update;
+mod utils;
 
 pub use init::InitSubcommand;
 pub use install::InstallSubcommand;
@@ -16,7 +17,7 @@ pub use manifest_to_json::ManifestToJsonSubcommand;
 pub use package::PackageSubcommand;
 pub use publish::PublishSubcommand;
 pub use search::SearchSubcommand;
-pub use update::UpdateSubcommand;
+pub use update::{PackageSpec, UpdateSubcommand};
 
 use structopt::StructOpt;
 
@@ -37,7 +38,7 @@ impl Args {
             Subcommand::Init(subcommand) => subcommand.run(),
             Subcommand::Login(subcommand) => subcommand.run(),
             Subcommand::Logout(subcommand) => subcommand.run(),
-            Subcommand::Update(subcommand) => subcommand.run(),
+            Subcommand::Update(subcommand) => subcommand.run(self.global),
             Subcommand::Search(subcommand) => subcommand.run(),
             Subcommand::Package(subcommand) => subcommand.run(),
             Subcommand::Install(subcommand) => subcommand.run(self.global),
@@ -61,6 +62,10 @@ pub struct GlobalOptions {
     /// Specify if the package index should be temporary (to prevent multiple use conflicts). Usable only by tests.
     #[structopt(skip)]
     pub use_temp_index: bool,
+
+    /// Specify if a specific auth token should be provided. Usable only by tests.
+    #[structopt(skip)]
+    pub check_token: Option<String>,
 }
 
 impl Default for GlobalOptions {
@@ -69,6 +74,7 @@ impl Default for GlobalOptions {
             verbosity: 0,
             test_registry: false,
             use_temp_index: false,
+            check_token: None,
         }
     }
 }
